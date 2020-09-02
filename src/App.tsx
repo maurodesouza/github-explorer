@@ -1,5 +1,12 @@
 import React from 'react';
 
-const App = () => <h1>Ahhh ... Hellow?</h1>;
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
+
+const App = () => (
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>
+);
 
 export default App;
