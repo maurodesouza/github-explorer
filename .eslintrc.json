@@ -39,6 +39,7 @@
     "import/prefer-default-export": "off",
 
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/jsx-one-expression-per-line": "off",
 
     "import/extensions": [
       "error",
