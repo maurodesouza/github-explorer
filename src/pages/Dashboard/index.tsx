@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
@@ -17,7 +17,16 @@ interface Repository {
 const Dashboard: React.FC = () => {
   const [inputError, setInputError] = useState('');
   const [newRepo, setNewRepo] = useState('');
-  const [repositories, setRepositories] = useState<Repository[]>([]);
+
+  const [repositories, setRepositories] = useState<Repository[]>(() => {
+    const storagedRepositories = localStorage.getItem(
+      '@GithubExplorer:repositories',
+    );
+
+    if (storagedRepositories) return JSON.parse(storagedRepositories);
+
+    return [];
+  });
 
   const handleAddRepository = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,6 +48,13 @@ const Dashboard: React.FC = () => {
       setInputError('Repositório não encontrado');
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@GithubExplorer:repositories',
+      JSON.stringify(repositories),
+    );
+  }, [repositories]);
 
   return (
     <>
